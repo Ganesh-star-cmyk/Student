@@ -1,17 +1,25 @@
-name: Java ci pipeline
-on: 
-push: 
-  branches: ["main"]
+name: Java CI (Plain Java)
+
+on:
+  push:
+    branches: [ "main" ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
-  steps:
-  - name: checkout code
-    uses: actions/checkout@v4
-  - name: set up java
-    uses: actions/setup-java@v4
-    with:
-      distribution: 'temurin'
-      java-version: '17'
-  - name: Build with maven
-    run: mvn clean install
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compile Java program
+      run: javac Student.java
+
+    - name: Run Java program
+      run: java Student
